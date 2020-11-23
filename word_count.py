@@ -31,7 +31,7 @@ for word in words:
     else:
         d[word] = d[word] + 1
 
-# Prints on the terminal all words an their count even the count of the keywords.
+# Prints on the terminal all words and their count even the count of the keywords.
 
 print('''
 
