@@ -1,3 +1,6 @@
+import re
+
+
 filename = input('''
 This program returns the words in a .txt file and their count in it.
 
@@ -13,9 +16,9 @@ text = f.read()
 text = text.replace('\n', ' ')
 
 # All words in the text are separated by space now.
-# Make a sorted list of all words in the text by splitting them.
+# Make a list of all words in the text using regular expressions.
 
-words = sorted(text.split(' '))
+words = re.findall(r'\w+',text,re.I)
 
 # Create an empty dictionary
 d = {}
@@ -26,17 +29,26 @@ d = {}
 
 
 for word in words:
-    if word not in d.keys():
-        d[word] = 1
-    else:
-        d[word] = d[word] + 1
+    word = word.lower()
+# finds the items that contain a digit and do not put them in the dictionary.
+# I presume the words has only word characters and no numbers
 
-# Prints on the terminal all words and their count even the count of the keywords.
+    match = re.search(r'\d',word)
+    if match:
+        pass
+    else:
+        if word not in d.keys():
+            d[word] = 1
+        else:
+            d[word] = d[word] + 1
+
+# Prints on the terminal all words and their count even the count of the keywords, alphabetically sorted.
 
 print('''
 
 The words in the file are: ''')
-for key in d.keys():
+
+for key in sorted(d.keys()):
     print(f"{key}: {d[key]}")
 print(f'''
 Total unique words used: {len(d)}''')
